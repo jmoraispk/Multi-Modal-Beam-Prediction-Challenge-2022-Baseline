@@ -19,7 +19,11 @@ During training, some changes should occur in the folder with the main script: a
 
 During testing, a csv file with the results should be generated, and performance metrics are printed, including the *competition score*. Furthermore, there is a small histogram plot included. 
 
-See the main script for further details and examples on how to use the scripts.
+See the main script for further details and examples of how to use the scripts.
+
+## Important code-level details
+### NaNs found in the data
+There are roughly 200 samples with NaN values in the challenge data, distributed across scenarios 31 to 34. When computing the optimum beam from a vector with 64 received powers (for example, called `pwr_vect`), simply using `np.argmax(pwr_vect)` will return the indices of the NaN value if it exists. To avoid returning the indices of the NaN values, use instead `np.nanargmax(pwr_vect)`. Nonetheless, it is worth noting that this should not considerably affect results since it happens with only ~1% of the data.
 
 # Expected Results
 
